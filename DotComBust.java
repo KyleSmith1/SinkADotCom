@@ -11,7 +11,6 @@ public class DotComBust {
 
     private GameHelper helper = new GameHelper();
     ArrayList<DotCom> dotComsList = new ArrayList<DotCom>();
-    ArrayList<String> locations = new ArrayList<>();
     int numOfGuesses = 0;
 
     private void setUpGame() {
@@ -27,15 +26,21 @@ public class DotComBust {
         dotComsList.add(dot2);
         dotComsList.add(dot3);
 
+        System.out.println("Your goal is to sink three dot coms.");
+
         for (DotCom dotComToSet : dotComsList) {
+            System.out.println("-------- Start of For Loop -------");
+            System.out.println(dotComToSet.name);
             ArrayList<String> newLocation = helper.placeDotCom(3);
             dotComToSet.setLocationCells(newLocation);
+            System.out.println("-------- End of For Loop -------");
+
         }
     }
 
     private void startPlaying() {
         while (!dotComsList.isEmpty()) {
-            String userGuess = helper.getUserInput("Enter a guess ");
+            String userGuess = helper.getUserInput("Enter a guess");
             checkUserGuess(userGuess);
         }
         finishGame();
@@ -45,34 +50,35 @@ public class DotComBust {
         numOfGuesses++;
         String result = "miss";
 
-        for (DotCom dotComToTest : dotComsList) {
-            result = dotComToTest.checkYourself(userGuess);
+        for (int x = 0; x < dotComsList.size(); x++) {
+            result = dotComsList.get(x).checkYourself(userGuess);
             if (result.equals("hit")) {
                 break;
             }
             if (result.equals("kill")) {
-                dotComsList.remove(dotComToTest);
+                dotComsList.remove(x);
                 break;
             }
+
         }
+
         System.out.println(result);
 
     }
 
     private void finishGame() {
         System.out.println("All Dot Coms are dead!");
-        if(numOfGuesses < 11){
+        if (numOfGuesses < 20) {
             System.out.println("That was good!");
-            System.out.println("Number of guesses: " + numOfGuesses); 
-        }
-        else{
+            System.out.println("Number of guesses: " + numOfGuesses);
+        } else {
             System.out.println("That was bad!");
             System.out.println("Number of guesses: " + numOfGuesses);
         }
-        
+
     }
-    
-    public static void main (String[] args){
+
+    public static void main(String[] args) {
         DotComBust game = new DotComBust();
         game.setUpGame();
         game.startPlaying();

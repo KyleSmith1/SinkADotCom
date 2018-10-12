@@ -26,13 +26,13 @@ public class DotCom {
 
             if (locationCells.isEmpty()) {
                 result = "kill";
-                System.out.println("You have won!");
+                System.out.println("You have sunk " + name);
             } else {
                 result = "hit";
             }
         }
 
-        System.out.println(result);
+        
         return result;
     }
 
