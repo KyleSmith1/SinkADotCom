@@ -29,11 +29,9 @@ public class DotComBust {
         System.out.println("Your goal is to sink three dot coms.");
 
         for (DotCom dotComToSet : dotComsList) {
-            System.out.println("-------- Start of For Loop -------");
-            System.out.println(dotComToSet.name);
+
             ArrayList<String> newLocation = helper.placeDotCom(3);
             dotComToSet.setLocationCells(newLocation);
-            System.out.println("-------- End of For Loop -------");
 
         }
     }
